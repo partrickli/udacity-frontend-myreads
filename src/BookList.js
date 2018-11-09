@@ -6,7 +6,7 @@ function BookList(props) {
   return (
     <div className="BookList">
       {props.list.map((book) => {
-        return <Book title={book} />;
+        return <Book title={book} key={book} />;
       })}
     </div>
   );

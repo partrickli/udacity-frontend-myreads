@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
+import { getAll } from './BooksAPI';
 import BookList from './BookList';
+import Book from './Book';
 
 class App extends Component {
-  books = [
-    ['Harry Potter', 'Three Body', 'AI'],
-    ['Lean StartUp', 'Zero to One'],
-    ['红楼梦', '西游记'],
-  ];
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
+  }
+
+  componentDidMount() {
+    getAll().then((books) => {
+      this.setState({
+        books: books,
+      });
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1>My Reads</h1>
-          {this.books.map((list) => {
-            return <BookList list={list} />;
+          {this.state.books.map((book) => {
+            return <Book title={book.title} key={book.title} />;
           })}
         </header>
       </div>
