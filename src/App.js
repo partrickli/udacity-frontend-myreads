@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { getAll } from './BooksAPI';
-import BookList from './BookList';
+import Shelf from './Shelf';
 import Book from './Book';
 
 class App extends Component {

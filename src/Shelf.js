@@ -1,10 +1,10 @@
 import React from 'react';
-import './BookList.css';
+import './Shelf.css';
 import Book from './Book';
 
-function BookList(props) {
+function Shelf(props) {
   return (
-    <div className="BookList">
+    <div className="Shelf">
       {props.list.map((book) => {
         return <Book title={book} key={book} />;
       })}
@@ -12,4 +12,4 @@ function BookList(props) {
   );
 }
 
-export default BookList;
+export default Shelf;
