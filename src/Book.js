@@ -2,10 +2,14 @@ import React from 'react';
 import './Book.css';
 
 function Book(props) {
+  const book = props.book;
   return (
     <div className="Book">
-      <img src={props.book.imageLinks.thumbnail} />
+      <img src={book.imageLinks.thumbnail} alt={book.title} />
       <h2>{props.book.title}</h2>
+      {book.authors.map((author) => {
+        return <p>{author}</p>;
+      })}
     </div>
   );
 }

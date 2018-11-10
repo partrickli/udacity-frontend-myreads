@@ -1,6 +1,6 @@
 .Shelf {
   width: 100%;
-  height: 380px;
+  height: auto;
   background-color: whitesmoke;
   display: flex;
   flex-direction: row;
