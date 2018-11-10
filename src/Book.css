@@ -1,5 +1,8 @@
 .Book {
-  background-color: azure;
-  color: black;
-  text-shadow: 1px 1px 2px pink;
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  color: darkslategray;
 }
