@@ -8,7 +8,7 @@ function Book(props) {
       <img src={book.imageLinks.thumbnail} alt={book.title} />
       <h2>{props.book.title}</h2>
       {book.authors.map((author) => {
-        return <p>{author}</p>;
+        return <p key={author}>{author}</p>;
       })}
     </div>
   );
