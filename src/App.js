@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { getAll } from './BooksAPI';
 import Shelf from './Shelf';
-import Book from './Book';
 
+const shelfTags = ['read', 'currentlyReading', 'wantToRead'];
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,14 +21,32 @@ class App extends Component {
   }
 
   render() {
+    const shelves = shelfTags.map((tag) => {
+      const books = this.state.books.filter((book) => book.shelf === tag);
+      return {
+        catagory: tag,
+        books: books,
+      };
+    });
+    console.log(shelves);
     return (
       <div className="App">
         <header className="App-header">
           <h1>My Reads</h1>
-          {this.state.books.map((book) => {
-            return <Book title={book.title} key={book.title} />;
-          })}
         </header>
+        <main>
+          <div className="shelves">
+            {shelves.map((shelf) => {
+              return (
+                <Shelf
+                  key={shelf.catagory}
+                  shelf={shelf.catagory}
+                  books={shelf.books}
+                />
+              );
+            })}
+          </div>
+        </main>
       </div>
     );
   }

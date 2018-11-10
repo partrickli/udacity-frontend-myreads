@@ -5,8 +5,9 @@ import Book from './Book';
 function Shelf(props) {
   return (
     <div className="Shelf">
-      {props.list.map((book) => {
-        return <Book title={book} key={book} />;
+      <h2>书架：{props.shelf}</h2>
+      {props.books.map((book) => {
+        return <Book book={book} key={book.title} />;
       })}
     </div>
   );
