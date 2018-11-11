@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getAll } from './BooksAPI';
+import { getAll, update } from './BooksAPI';
 import Shelf from './Shelf';
 
 const shelfTags = ['read', 'currentlyReading', 'wantToRead'];
@@ -18,6 +18,8 @@ class App extends Component {
     let books = this.state.books.slice();
     books[index].shelf = shelf;
     this.setState({ books: books });
+
+    update(books[index], shelf).then((v) => console.log(v));
   }
 
   componentDidMount() {
