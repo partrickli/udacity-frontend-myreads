@@ -10,6 +10,14 @@ class App extends Component {
     this.state = {
       books: [],
     };
+    this.changeShelf = this.changeShelf.bind(this);
+  }
+
+  changeShelf(title, shelf) {
+    const index = this.state.books.findIndex((book) => book.title === title);
+    let books = this.state.books.slice();
+    books[index].shelf = shelf;
+    this.setState({ books: books });
   }
 
   componentDidMount() {
@@ -28,7 +36,6 @@ class App extends Component {
         books: books,
       };
     });
-    console.log(shelves);
     return (
       <div className="App">
         <header className="App-header">
@@ -42,6 +49,7 @@ class App extends Component {
                   key={shelf.catagory}
                   shelf={shelf.catagory}
                   books={shelf.books}
+                  changeShelf={this.changeShelf}
                 />
               );
             })}

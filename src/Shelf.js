@@ -15,7 +15,9 @@ function Shelf(props) {
         <h2>{shelfHeaders[props.shelf]}</h2>
       </div>
       {props.books.map((book) => {
-        return <Book book={book} key={book.title} />;
+        return (
+          <Book book={book} key={book.title} changeShelf={props.changeShelf} />
+        );
       })}
     </div>
   );

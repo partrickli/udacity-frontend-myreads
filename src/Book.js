@@ -10,6 +10,16 @@ function Book(props) {
       {book.authors.map((author) => {
         return <p key={author}>{author}</p>;
       })}
+      <label>Move to:</label>
+      <select
+        onChange={(event) => {
+          props.changeShelf(book.title, event.target.value);
+        }}
+      >
+        <option value="read">Read</option>
+        <option value="wantToRead">Want To Read</option>
+        <option value="currentlyReading">Currently Reading</option>
+      </select>
     </div>
   );
 }
