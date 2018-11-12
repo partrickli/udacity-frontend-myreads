@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import { getAll, update } from './BooksAPI';
-import Shelf from './Shelf';
+import Search from './Search';
+import ReadList from './ReadList';
 
 const shelfTags = ['read', 'currentlyReading', 'wantToRead'];
 class App extends Component {
@@ -39,25 +41,24 @@ class App extends Component {
       };
     });
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>My Reads</h1>
-        </header>
-        <main>
-          <div className="shelves">
-            {shelves.map((shelf) => {
-              return (
-                <Shelf
-                  key={shelf.catagory}
-                  shelf={shelf.catagory}
-                  books={shelf.books}
-                  changeShelf={this.changeShelf}
-                />
-              );
-            })}
-          </div>
-        </main>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <header className="App-header">
+            <h1>My Reads</h1>
+            <Link to="/search">Search</Link>
+          </header>
+          <main>
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <ReadList shelves={shelves} changeShelf={this.changeShelf} />
+              )}
+            />
+            <Route path="/search" component={Search} />
+          </main>
+        </div>
+      </BrowserRouter>
     );
   }
 }
