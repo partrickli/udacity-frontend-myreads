@@ -15,6 +15,11 @@ class App extends Component {
     this.changeShelf = this.changeShelf.bind(this);
   }
 
+  shouldComponentUpdate() {
+    console.log('App shouldComponentUpdate called');
+    return true;
+  }
+
   changeShelf(bookToChange, shelf) {
     let books = this.state.books.slice();
     const index = books.findIndex((book) => {
@@ -23,7 +28,7 @@ class App extends Component {
 
     if (index === -1) {
       // Add to list, if book not exist on state
-      books.concat(bookToChange);
+      books = books.concat(bookToChange);
       update(bookToChange, shelf).then((v) => console.log(v));
     } else {
       //Change shelf
