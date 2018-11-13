@@ -31,7 +31,10 @@ class Search extends Component {
             });
           }}
         />
-        <SearchResult books={this.state.searchedBooks} />
+        <SearchResult
+          books={this.state.searchedBooks}
+          changeShelf={this.props.changeShelf}
+        />
       </div>
     );
   }

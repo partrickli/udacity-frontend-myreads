@@ -14,7 +14,9 @@ function Book(props) {
       <select
         value={book.shelf}
         onChange={(event) => {
-          props.changeShelf(book.title, event.target.value);
+          console.log('book to change inside Book Component');
+          console.log(book);
+          props.changeShelf(book, event.target.value);
         }}
       >
         <option value="read">Read</option>

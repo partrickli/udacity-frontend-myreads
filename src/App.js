@@ -15,13 +15,23 @@ class App extends Component {
     this.changeShelf = this.changeShelf.bind(this);
   }
 
-  changeShelf(title, shelf) {
-    const index = this.state.books.findIndex((book) => book.title === title);
+  changeShelf(bookToChange, shelf) {
     let books = this.state.books.slice();
-    books[index].shelf = shelf;
-    this.setState({ books: books });
+    const index = books.findIndex((book) => {
+      return book.title === bookToChange.title;
+    });
 
-    update(books[index], shelf).then((v) => console.log(v));
+    if (index === -1) {
+      // Add to list, if book not exist on state
+      books.concat(bookToChange);
+      update(bookToChange, shelf).then((v) => console.log(v));
+    } else {
+      //Change shelf
+      books[index].shelf = shelf;
+      update(books[index], shelf).then((v) => console.log(v));
+    }
+
+    this.setState({ books: books });
   }
 
   componentDidMount() {
@@ -55,7 +65,10 @@ class App extends Component {
                 <ReadList shelves={shelves} changeShelf={this.changeShelf} />
               )}
             />
-            <Route path="/search" component={Search} />
+            <Route
+              path="/search"
+              component={() => <Search changeShelf={this.changeShelf} />}
+            />
           </main>
         </div>
       </BrowserRouter>
