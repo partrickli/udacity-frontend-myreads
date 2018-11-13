@@ -11,7 +11,7 @@ function Book(props) {
 
         {Array.isArray(book.authors) &&
           book.authors.map((author) => {
-            return <h3 key={author}>{author}</h3>;
+            return <p key={author}>{author}</p>;
           })}
         <label>Move to:</label>
         <select
