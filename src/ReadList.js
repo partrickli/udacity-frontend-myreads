@@ -1,4 +1,5 @@
 import React from 'react';
+import './ReadList.css';
 import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
 function BookList(props) {
@@ -15,7 +16,7 @@ function BookList(props) {
         );
       })}
       <button className="add-book">
-        <Link to="/search">Add</Link>
+        <Link to="/search">Add Book</Link>
       </button>
     </div>
   );
