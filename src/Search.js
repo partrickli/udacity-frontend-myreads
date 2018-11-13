@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Search.css';
 import { search } from './BooksAPI';
 import SearchResult from './SearchResult';
 
@@ -13,6 +14,8 @@ class Search extends Component {
     return (
       <div className="search">
         <input
+          placeholder="search query"
+          className="search-box"
           onChange={(event) => {
             let searchKeyword = event.target.value;
             console.log(`search for: ${searchKeyword}`);
