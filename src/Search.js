@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Book from './Book';
 import { search } from './BooksAPI';
 import SearchResult from './SearchResult';
 

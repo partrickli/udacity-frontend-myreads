@@ -1,5 +1,6 @@
 import React from 'react';
 import Shelf from './Shelf';
+import { Link } from 'react-router-dom';
 function BookList(props) {
   return (
     <div className="shelves">
@@ -13,6 +14,9 @@ function BookList(props) {
           />
         );
       })}
+      <button className="add-book">
+        <Link to="/search">Add</Link>
+      </button>
     </div>
   );
 }

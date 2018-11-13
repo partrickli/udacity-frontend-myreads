@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { getAll, update } from './BooksAPI';
 import Search from './Search';
@@ -55,7 +55,6 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1>My Reads</h1>
-            <Link to="/search">Search</Link>
           </header>
           <main>
             <Route
