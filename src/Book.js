@@ -6,23 +6,27 @@ function Book(props) {
   return (
     <div className="Book">
       <img src={book.imageLinks.thumbnail} alt={book.title} />
-      <h2>{book.title}</h2>
-      {/* {book.authors.map((author) => {
-        return <p key={author}>{author}</p>;
-      })} */}
-      <label>Move to:</label>
-      <select
-        value={book.shelf}
-        onChange={(event) => {
-          console.log('book to change inside Book Component');
-          console.log(book);
-          props.changeShelf(book, event.target.value);
-        }}
-      >
-        <option value="read">Read</option>
-        <option value="wantToRead">Want To Read</option>
-        <option value="currentlyReading">Currently Reading</option>
-      </select>
+      <div className="book-detail">
+        <h2>{book.title}</h2>
+        <hr />
+        {book.authors ||
+          book.authors.map((author) => {
+            return <h3 key={author}>{author}</h3>;
+          })}
+        <label>Move to:</label>
+        <select
+          value={book.shelf}
+          onChange={(event) => {
+            console.log('book to change inside Book Component');
+            console.log(book);
+            props.changeShelf(book, event.target.value);
+          }}
+        >
+          <option value="read">Read</option>
+          <option value="wantToRead">Want To Read</option>
+          <option value="currentlyReading">Currently Reading</option>
+        </select>
+      </div>
     </div>
   );
 }
