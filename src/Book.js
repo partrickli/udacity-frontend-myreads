@@ -3,9 +3,11 @@ import './Book.css';
 
 function Book(props) {
   const book = props.book;
+  let thumbnail = book.imageLinks ? book.imageLinks.thumbnail : 'thumbnail.jpg';
+
   return (
     <div className="Book">
-      <img src={book.imageLinks.thumbnail} alt={book.title} />
+      <img src={thumbnail} alt={book.title} />
       <div className="book-detail">
         <h2>{book.title}</h2>
 
