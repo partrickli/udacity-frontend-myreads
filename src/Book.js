@@ -8,8 +8,8 @@ function Book(props) {
       <img src={book.imageLinks.thumbnail} alt={book.title} />
       <div className="book-detail">
         <h2>{book.title}</h2>
-        <hr />
-        {book.authors ||
+
+        {Array.isArray(book.authors) &&
           book.authors.map((author) => {
             return <h3 key={author}>{author}</h3>;
           })}
