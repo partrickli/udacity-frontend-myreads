@@ -12,6 +12,7 @@ function Book(props) {
       })} */}
       <label>Move to:</label>
       <select
+        value={book.shelf}
         onChange={(event) => {
           props.changeShelf(book.title, event.target.value);
         }}
