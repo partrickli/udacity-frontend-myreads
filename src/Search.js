@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Search.css';
 import { search } from './BooksAPI';
 import SearchResult from './SearchResult';
+import { NavLink } from 'react-router-dom';
 
 class Search extends Component {
   constructor(props) {
@@ -33,6 +34,11 @@ class Search extends Component {
             });
           }}
         />
+        <div>
+          <NavLink className="nav-home" to="/">
+            Home
+          </NavLink>
+        </div>
         <SearchResult
           books={this.state.searchedBooks}
           changeShelf={this.props.changeShelf}
