@@ -17,6 +17,14 @@ export const get = (bookId) =>
     .then((res) => res.json())
     .then((data) => data.book);
 
+/**
+ *
+ * @param {string[]} bookIds
+ */
+export function getBooksByIds(bookIds) {
+  let fetches = bookIds.map((id) => get(id));
+  return Promise.all(fetches);
+}
 export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then((res) => res.json())

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Search.css';
-import { search } from './BooksAPI';
+import { search, getBooksByIds } from './BooksAPI';
 import SearchResult from './SearchResult';
 import { NavLink } from 'react-router-dom';
 import { intersect } from './util';
@@ -42,9 +42,16 @@ class Search extends Component {
               this.setState({ searchedBooks: [] });
             } else {
               let keywords = searchKeyword.split(' ').filter((k) => k !== '');
-              searchBooks(keywords).then((books) => {
-                this.setState({ searchedBooks: books });
-              });
+              searchBooks(keywords)
+                .then((books) => {
+                  return books.map((book) => book.id);
+                })
+                .then((bookIds) => {
+                  return getBooksByIds(bookIds);
+                })
+                .then((books) => {
+                  this.setState({ searchedBooks: books });
+                });
             }
           }}
         />

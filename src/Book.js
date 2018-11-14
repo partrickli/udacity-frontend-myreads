@@ -17,14 +17,14 @@ function Book(props) {
           })}
         <label>Move to:</label>
         <select
-          value={book.shelf}
+          value={book.shelf || ''}
           onChange={(event) => {
             console.log('book to change inside Book Component');
             console.log(book);
             props.changeShelf(book, event.target.value);
           }}
         >
-          <option value="">choose a shelf</option>
+          <option value="">none</option>
           <option value="read">Read</option>
           <option value="wantToRead">Want To Read</option>
           <option value="currentlyReading">Currently Reading</option>
