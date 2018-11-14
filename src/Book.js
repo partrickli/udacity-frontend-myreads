@@ -24,6 +24,7 @@ function Book(props) {
             props.changeShelf(book, event.target.value);
           }}
         >
+          <option value="">choose a shelf</option>
           <option value="read">Read</option>
           <option value="wantToRead">Want To Read</option>
           <option value="currentlyReading">Currently Reading</option>
