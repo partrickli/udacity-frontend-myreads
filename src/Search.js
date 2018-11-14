@@ -3,6 +3,25 @@ import './Search.css';
 import { search } from './BooksAPI';
 import SearchResult from './SearchResult';
 import { NavLink } from 'react-router-dom';
+import { intersect } from './util';
+
+/**
+ *
+ * @param {string[]} keywords
+ */
+function searchBooks(keywords) {
+  if (keywords.length === 1) {
+    return search(keywords[0]);
+  } else {
+    let searchPromises = keywords.map((keyword) => search(keyword));
+    return Promise.all(searchPromises).then((bookLists) => {
+      let result = bookLists.reduce((previous, current) => {
+        return intersect(previous, current, (b1, b2) => b1.id === b2.id);
+      }, bookLists[0]);
+      return result;
+    });
+  }
+}
 
 class Search extends Component {
   constructor(props) {
@@ -19,19 +38,14 @@ class Search extends Component {
           className="search-box"
           onChange={(event) => {
             let searchKeyword = event.target.value;
-            console.log(`search for: ${searchKeyword}`);
-            search(searchKeyword).then((books) => {
-              console.log(books);
-              if (books && !books.error) {
-                this.setState({
-                  searchedBooks: books,
-                });
-              } else {
-                this.setState({
-                  searchedBooks: [],
-                });
-              }
-            });
+            if (searchKeyword.trim() === '') {
+              this.setState({ searchedBooks: [] });
+            } else {
+              let keywords = searchKeyword.split(' ').filter((k) => k !== '');
+              searchBooks(keywords).then((books) => {
+                this.setState({ searchedBooks: books });
+              });
+            }
           }}
         />
         <div>
