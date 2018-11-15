@@ -27,6 +27,9 @@ class App extends Component {
     });
 
     if (index === -1) {
+      // Set shelf
+      bookToChange.shelf = shelf;
+
       // Add to list, if book not exist on state
       books = books.concat(bookToChange);
       update(bookToChange, shelf).then((v) => console.log(v));
