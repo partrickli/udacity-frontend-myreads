@@ -3,25 +3,6 @@ import './Search.css';
 import { search, getBooksByIds } from './BooksAPI';
 import SearchResult from './SearchResult';
 import { NavLink } from 'react-router-dom';
-import { intersect } from './util';
-
-/**
- *
- * @param {string[]} keywords
- */
-function searchBooks(keywords) {
-  if (keywords.length === 1) {
-    return search(keywords[0]);
-  } else {
-    let searchPromises = keywords.map((keyword) => search(keyword));
-    return Promise.all(searchPromises).then((bookLists) => {
-      let result = bookLists.reduce((previous, current) => {
-        return intersect(previous, current, (b1, b2) => b1.id === b2.id);
-      }, bookLists[0]);
-      return result;
-    });
-  }
-}
 
 class Search extends Component {
   constructor(props) {
@@ -37,18 +18,15 @@ class Search extends Component {
           placeholder="search query"
           className="search-box"
           onChange={(event) => {
-            let searchKeyword = event.target.value;
-            if (searchKeyword.trim() === '') {
+            let searchKeyword = event.target.value.trim();
+            if (searchKeyword === '') {
               this.setState({ searchedBooks: [] });
             } else {
-              let keywords = searchKeyword.split(' ').filter((k) => k !== '');
-              searchBooks(keywords)
+              search(searchKeyword)
                 .then((books) => {
                   return books.map((book) => book.id);
                 })
-                .then((bookIds) => {
-                  return getBooksByIds(bookIds);
-                })
+                .then((bookIds) => getBooksByIds(bookIds))
                 .then((books) => {
                   this.setState({ searchedBooks: books });
                 });
